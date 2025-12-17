@@ -1,0 +1,75 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+    <div class="row">
+         <div class="col-8">
+<form method="post" action="/listings/<%= toEditC._id %>?_method=put" novalidate class="needs-validation">
+
+  <div class="mb-3">
+    <label for="utitle" class="form-label">Title</label>
+    <input 
+      type="text" 
+      id="utitle" 
+      name="utitle" 
+      class="form-control"
+      value="<%= toEditC.title %>"   required>
+  </div>
+
+  <div class="mb-3">
+    <label for="udescription" class="form-label">Description</label>
+    <textarea 
+      id="udescription" 
+      name="udescription" 
+      class="form-control" required><%= toEditC.description %></textarea>
+  </div>
+
+  <div class="row">
+
+  <div class="mb-3 col-md-4">
+    <label for="uprice" class="form-label">Price</label>
+    <input 
+      type="number" 
+      id="uprice" 
+      name="uprice" 
+      class="form-control"
+      value="<%= toEditC.price %>" required>
+  </div>
+
+  <div class="mb-3 col-md-8">
+    <label for="ucountry" class="form-label">Country</label>
+    <input 
+      type="text" 
+      id="ucountry" 
+      name="ucountry" 
+      class="form-control"
+      value="<%= toEditC.country %>" required>
+      <div class="invalid-feedback">Country name should be valid</div>
+  </div>
+
+  </div>
+
+  <div class="mb-3">
+    <label for="ulocation" class="form-label">Location</label>
+    <input 
+      type="text" 
+      id="ulocation" 
+      name="ulocation" 
+      class="form-control"
+      value="<%= toEditC.location %>" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="uimage" class="form-label">Image URL</label>
+    <input 
+      type="text" 
+      id="uimage" 
+      name="uimage" 
+      class="form-control"
+      value="<%= toEditC.image.url %>" required> 
+  </div>
+
+  <button type="submit" class="btn btn-primary">Confirm</button>
+
+</form>
+</div>
+</div>
+</body>

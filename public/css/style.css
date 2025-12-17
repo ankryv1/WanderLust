@@ -1,0 +1,125 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+}
+
+.ri-ancient-gate-fill{
+    font-size: 2.5rem;
+    color: #fe424d;
+}
+
+.nav-link{
+    color: #222222 !important;
+}
+
+.navbar{
+    background-color: white;
+}
+
+.f-info-links a{
+    text-decoration: none  ;
+    color: #222222;
+}
+
+.f-info-links a:hover{
+    text-decoration: underline  ;
+
+}
+
+.f-info-socials{
+    font-size: 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.f-info-socials a{
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links{
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.f-info{
+    padding: 5px;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    gap: 1rem;
+    display: flex;
+    height: 8rem;
+    background-color: #ebebeb;
+}
+
+/* Cards */
+
+.listing-card{
+    border: none !important;
+    margin-bottom: 2rem;
+    
+ 
+}
+
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+.card-body{
+    margin-top: 5px;
+    padding: 0 !important;
+}
+.card-text p{
+    font-weight: 500 !important;
+}
+
+.carda {
+    text-decoration: none;
+}
+
+.card-img-overlay{
+    opacity:0;
+}
+.card-img-overlay:hover{
+    opacity:0.2;
+    background-color: white;
+}
+
+/* Styling New Listing */
+
+.row{
+    color:#222222 !important;
+    font-weight: 600 !important;
+}
+
+.container {
+    flex:1;
+}
+.btn-dark{
+    background-color: #fe424d !important;
+    border: none !important;
+    font-weight: 700 !important;
+}
+
+.show-img{
+    height: 30vh;
+}
+
+.btns{
+    display: flex;
+}
+.show-card{
+    margin-top:1rem; 
+}
+
+.delete-b{
+    border:1px;
+    background-color: black !important;
+    color: white !important;
+}
