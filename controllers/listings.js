@@ -11,7 +11,7 @@ module.exports.renderNewForm = (req, res) => {
 }
 
 module.exports.addingNewListing = async (req, res, next) => {
-
+  console.log(req.body);
     let { title, description, country, image, location, price } = req.body;
 
     // if (!title) throw new ExpressError(410, "Title is required");                             //    server side validation ke liye hai ye checkings laga rahe hai

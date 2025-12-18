@@ -32,7 +32,7 @@ module.exports.validateUser = (req, res, next) => {
 
 module.exports.isLoggedIn = (req, res, next) =>{
    if(!req.isAuthenticated()) {
-      req.session.redirectUrl = req.get("Referer") || "/listings";
+      req.session.redirectUrl = req.originalUrl; 
       req.flash("error" , "You are not logged in");
       return res.redirect("/login");
     }
