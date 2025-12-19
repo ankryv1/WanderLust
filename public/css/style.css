@@ -123,3 +123,18 @@ body{
     background-color: black !important;
     color: white !important;
 }
+
+.sbutton{
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    font-size: 1.5rem;
+    font-weight: 700;
+     background-color: #e03150;
+     color: white;
+    transition: background-color 0.2s ease;
+}
+.sbutton:hover{
+    background-color: #0d6efd;
+    color: white;
+}

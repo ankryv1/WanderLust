@@ -9,7 +9,7 @@ const UserControllers = require("../controllers/users.js");
 
 router
   .route("/signup")
-  .get(UserControllers.renderSingupForm)
+  .get(UserControllers.renderSignupForm)
   .post(validateUser, UserControllers.signup);
 
 router

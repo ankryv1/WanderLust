@@ -26,11 +26,15 @@ module.exports.postReview = async (req, res) => {
 
   module.exports.destroyReview = async (req, res) => {
       let { id, reviewId } = req.params;
-      if(req.user.username.equals(Review.findById(reviewId).author))
-        {
+
+      let review = await Review.findById(reviewId);
+      if(!review){
+        res.flash("error", "review not found");
+        return res.redirect(`/listings/${id}`);
+      }
       await Listing.findByIdAndUpdate(id, { $pull: { review: reviewId } });
-      let review = await Review.findByIdAndDelete(reviewId);
+      await Review.findByIdAndDelete(reviewId);
       req.flash("success", " Review Deleted");
       res.redirect(`/listings/${id}` );
-        }
+        
     }

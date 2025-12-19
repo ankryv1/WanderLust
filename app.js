@@ -1,3 +1,9 @@
+if(process.env.NODE_ENV !="production"){
+  require("dotenv").config();
+}
+
+
+
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -36,6 +42,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use(express.static("public"));
+
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 
@@ -57,6 +64,7 @@ app.use( (req, res, next) =>{
   res.locals.success = req.flash("success");
   res.locals.error =  req.flash("error");
   res.locals.currUser = req.user;
+  res.locals.preferredCountry = req.query.preferredCountry || "";
   console.log(res.locals.currUser)
   next();
 })
@@ -78,19 +86,3 @@ app.use((err, req, res, next) => {
 app.listen(3000, (req, res) => {
   console.log("server started");
 });
-
-// app.get("/", (req, res) => {
-//   res.send("req send");
-// });
-
-//  for demo user
-// app.get("/demouser" ,async(req, res) =>{
-//   let fakeUser = new User({
-//     email: "student@gmail.com" ,
-//     username: "delt-student"
-//   })
-
-//   let registeredUser = await User.register(fakeUser , "12345a");
-//   console.log(registeredUser);
-//   res.send(registeredUser);
-// })

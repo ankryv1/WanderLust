@@ -9,20 +9,11 @@ const listSchema = new mongoose.Schema({
   },
 
   description: String,
-
   country: String,
-
   image: {
-    filename: {
-      type: String,
-      default: "listingimage",
-    },
-    url: {
-      type: String,
-      default: "/images/villa.jpg",
-    },
+      url: String,
+      filename: String
   },
-
   location: String,
   price: Number,
   review: [

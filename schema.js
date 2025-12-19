@@ -1,24 +1,26 @@
-const Joi = require('joi');
+const Joi = require("joi");
 
+/*    LISTING VALIDATION  */
 module.exports.listingSchema = Joi.object({
-
-  title: Joi.string().required(),
-  description: Joi.string().required(),
-  country: Joi.string().required(),
-  location: Joi.string().required(),
-  price: Joi.number().required().min(0),
+  title: Joi.string().trim().min(1).required(),
+  description: Joi.string().trim().min(1).required(),
+  country: Joi.string().trim().min(1).required(),
+  location: Joi.string().trim().min(1).required(),
+  price: Joi.number().min(0).required(),
   image: Joi.string().allow("", null)
+}).required();
 
-});
 
-
+/*    REVIEW VALIDATION  */
 module.exports.valiRev = Joi.object({
-    comment : Joi.string().required().min(5) ,
-    rating: Joi.number().required().min(1).max(5)
-})
+  comment: Joi.string().trim().min(5).required(),
+  rating: Joi.number().min(1).max(5).required()
+}).required();
 
+
+/*    USER Validation  */
 module.exports.valiUser = Joi.object({
-  username: Joi.string().required(),
+  username: Joi.string().trim().min(3).required(),
   password: Joi.string().min(6).required(),
   email: Joi.string().email().required()
-});
+}).required();

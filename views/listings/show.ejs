@@ -10,13 +10,28 @@
         alt="listing-image"
       />
       <br />
-      <div class="card-body">
-        <p class="card-text">Owned By: <%= nag.owner.username %></p>
-        <p class="card-text"><%= nag.description %></p>
-        <p class="card-text"><%= nag.country %></p>
-        <p class="card-text">&#8377;<%= nag.price.toLocaleString("en-IN") %></p>
-        <p class="card-text"><%= nag.location %></p>
-      </div>
+<div class="card-body">
+  <p class="card-text">
+    👤 <strong>Owned by:</strong> <%= nag.owner.username %>
+  </p>
+
+  <p class="card-text">
+    📝 <strong>Description:</strong> <%= nag.description %>
+  </p>
+
+  <p class="card-text">
+    🌍 <strong>Country:</strong> <%= nag.country %>
+  </p>
+
+  <p class="card-text">
+    💰 <strong>Price:</strong> &#8377;<%= nag.price.toLocaleString("en-IN") %>
+  </p>
+
+  <p class="card-text">
+    📍 <strong>Location:</strong> <%= nag.location %>
+  </p>
+</div>
+
     </div>
   </div>
 
@@ -40,14 +55,9 @@
       action="/listings/<%= nag._id %>/reviews"
       method="post"
       novalidate
-      class="needs-validation my-3"
+      class="needs-validation my-2"
     >
-      <!-- <div class="mb-3">
-        <div>
-          <label for="rating" class="form-label">Rating</label>
-          <input type="range" name="rating" id="rating" min="1" max="5" />
-        </div> -->
-        <div class="my-3">
+        <div class="">
         <label for="rating" class="form-label">Rating</label>
         <fieldset class="starability-slot">
             
@@ -72,9 +82,6 @@
           <label for="first-rate5" title="Amazing">5 stars</label>
         </fieldset>
         </div>
-      
-
-        <br />
         <div>
           <label for="comment" class="form-label">Comment</label>
           <textarea
@@ -112,7 +119,7 @@
         </div>
       </div>
       <% } %> <% } %> <% if(!nag.review.length) { %>
-      <h6>No Reviews Yet, Sign in and be the first to Review it</h6>
+      <h6>No Reviews Yet, Be the first to Review it</h6>
       <% } %>
     </div>
   </div>
