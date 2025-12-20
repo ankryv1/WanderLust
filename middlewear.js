@@ -1,6 +1,8 @@
 const ExpressError = require("./utils/ExpressError.js");
 const { listingSchema ,valiUser, valiRev} = require("./schema");
 const Review = require("./models/review.js");
+const Listing = require("./models/listings.js");
+
 
 module.exports.validateReview = (req, res, next) => {
   let { error } = valiRev.validate(req.body);
@@ -23,6 +25,7 @@ module.exports.validateUser = (req, res, next) => {
   let { error } = valiUser.validate(req.body);
   if (error) {
     req.flash("error", `${error.details[0].message}`);
+    return res.redirect("/signup");
   }
   next();
 };
@@ -49,12 +52,19 @@ module.exports.isReviewAuthor = async (req, res, next) => {
   let { id, reviewId } = req.params;
   let review = await Review.findById(reviewId);
 
-  if (!res.locals.currUser._id.equals(review.author)) {
+  if (!review) {
+    req.flash("error", "Review not found");
+    return res.redirect(`/listings/${id}`);
+  }
+
+  if (!review.author.equals(res.locals.currUser._id)) {
     req.flash("error", "You are not the author of this review");
     return res.redirect(`/listings/${id}`);
   }
+
   next();
 };
+
 
 module.exports.isListingOwner = async (req, res, next) => {
   let { id } = req.params;

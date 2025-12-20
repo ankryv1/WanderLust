@@ -52,7 +52,7 @@ module.exports.showListing = async (req, res) => {
     .populate({ path: "review", populate: { path: "author" } });
   if (!nag) {
     req.flash("error", " Listing you requested for does not exist!");
-    return res.redirect("/listings/new.ejs");
+    return res.redirect("/listings");
   }
   console.log(nag);
   res.render("listings/show.ejs", { nag });

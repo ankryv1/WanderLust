@@ -2,8 +2,6 @@ if(process.env.NODE_ENV !="production"){
   require("dotenv").config();
 }
 
-
-
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -14,20 +12,31 @@ const ExpressError = require("./utils/ExpressError.js");
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const session = require("express-session");
+const MongoStore = require('connect-mongo')
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 const userRouter = require("./routes/user.js");
 const flash = require("connect-flash")
- 
+const dbUrl = process.env.ATLASDB_URL;
+
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  collectionName: "sessions",
+});
+
+store.on("error", (err)=> {
+  console.log("ERROR in MONGO SESSION STORE", err);
+});
 
 let sessionOptions = {
+  store ,
   secret: "mysupersecretcode",
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
-    maxage: 7 * 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
     httpOnly: true,
   },
 };
@@ -57,7 +66,7 @@ main()
   .catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust");
+  await mongoose.connect(dbUrl); 
 }
 
 app.use( (req, res, next) =>{
@@ -65,7 +74,6 @@ app.use( (req, res, next) =>{
   res.locals.error =  req.flash("error");
   res.locals.currUser = req.user;
   res.locals.preferredCountry = req.query.preferredCountry || "";
-  console.log(res.locals.currUser)
   next();
 })
 
@@ -78,8 +86,10 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
+  if (res.headersSent) {
+    return next(err);
+  }
   let { statusCode = 500, message = "Something Went Wrong" } = err;
-  // res.render("listings/error.ejs" ,{err});
   res.status(statusCode).render("listings/error.ejs", { message });
 });
 

@@ -29,7 +29,7 @@ module.exports.postReview = async (req, res) => {
 
       let review = await Review.findById(reviewId);
       if(!review){
-        res.flash("error", "review not found");
+        req.flash("error", "review not found");
         return res.redirect(`/listings/${id}`);
       }
       await Listing.findByIdAndUpdate(id, { $pull: { review: reviewId } });
