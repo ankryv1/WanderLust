@@ -31,7 +31,7 @@ store.on("error", (err)=> {
 
 let sessionOptions = {
   store ,
-  secret: "mysupersecretcode",
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
