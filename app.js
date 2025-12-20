@@ -19,6 +19,7 @@ const User = require("./models/user.js");
 const userRouter = require("./routes/user.js");
 const flash = require("connect-flash")
 const dbUrl = process.env.ATLASDB_URL;
+const PORT = 3000;
 
 const store = MongoStore.create({
   mongoUrl: dbUrl,
@@ -93,6 +94,6 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("listings/error.ejs", { message });
 });
 
-app.listen(3000, (req, res) => {
+app.listen(PORT , (req, res) => {
   console.log("server started");
 });
